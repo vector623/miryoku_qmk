@@ -11,3 +11,7 @@
     #undef ENCODER_RESOLUTION
 #endif
 #define ENCODER_RESOLUTION 1
+// #define K40 KC_A  // Assigns the key to the 'A' key
+#define K41 KC_MUTE  // Assigns the key to the 'A' key
+
+#define OLED_TIMEOUT 60000
