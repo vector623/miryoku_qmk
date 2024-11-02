@@ -5,3 +5,9 @@
 
 #pragma once
 
+#define ENCODER_A_PINS { F4 }
+#define ENCODER_B_PINS { F5 }
+#ifdef ENCODER_RESOLUTION
+    #undef ENCODER_RESOLUTION
+#endif
+#define ENCODER_RESOLUTION 1
