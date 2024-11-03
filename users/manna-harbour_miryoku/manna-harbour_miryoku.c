@@ -6,6 +6,7 @@
 #include QMK_KEYBOARD_H
 
 #include "manna-harbour_miryoku.h"
+#include "stdio.h"
 
 
 // Additional Features double tap guard
@@ -94,16 +95,16 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     if (!encoder_update_user(index, clockwise)) {
       return false; /* Don't process further events if user function exists and returns false */ }
     if (index == 0) { /* First encoder */
-//         if (clockwise) {
-//             tap_code(KC_PGDN);
-//         } else {
-//             tap_code(KC_PGUP);
-//         }
         if (clockwise) {
-            tap_code(KC_DOWN);
+            tap_code(KC_PGDN);
         } else {
-            tap_code(KC_UP);
+            tap_code(KC_PGUP);
         }
+//         if (clockwise) {
+//             tap_code(KC_DOWN);
+//         } else {
+//             tap_code(KC_UP);
+//         }
     } else if (index == 1) { /* Second encoder */
         if (clockwise) {
             tap_code(KC_VOLU);
@@ -124,14 +125,13 @@ static void render_logo(void) {
 
     oled_write_P(qmk_logo, false);
 }
-static void render_bee(void) {
-//     oled_clear();
-    oled_write_P(PSTR("dg sofle v2"), false);
-}
+// static void render_bee(void) {
+//       oled_write_P(PSTR("Leon, Klaus and Alan"), false);
+// }
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        render_bee();
+//         render_bee();
     } else {
         render_logo();
     }
@@ -145,5 +145,21 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
     return rotation;
 }
-
 #endif
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  // If console is enabled, it will print the matrix position and status of each key pressed
+// #ifdef CONSOLE_ENABLE
+//     uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+// #endif
+    if (is_keyboard_master()) {
+        char buffer[100];
+        snprintf(buffer, 100, "KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n",
+                 keycode, record->event.key.col, record->event.key.row, record->event.pressed,
+                 record->event.time, record->tap.interrupted, record->tap.count);
+
+        oled_set_cursor(0, 0);
+        oled_write_P(PSTR(buffer), false);
+    }
+  return true;
+}
