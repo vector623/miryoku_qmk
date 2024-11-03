@@ -12,10 +12,6 @@
 #endif
 #define ENCODER_RESOLUTION 4
 
-#define K40 KC_F1
-#define K52 KC_F2
-#define K54 KC_F3
-#define K56 KC_F4
 
 #define K41 KC_1
 #define K42 KC_2
@@ -28,16 +24,19 @@
 #define K49 KC_9
 #define K50 KC_0
 
-#define K51 KC_F12
-#define K53 KC_F11
-#define K55 KC_F10
-#define K57 KC_F9
+#define K51 KC_F1
+#define K52 KC_F2
+#define K53 KC_F3
+#define K54 KC_F4
+#define K55 KC_F5
+#define K56 KC_F6
+#define K57 KC_F7
+#define K58 KC_F8
+#define K59 KC_F9
+#define K60 KC_F10
+#define K61 KC_F11
+#define K62 KC_F12
 
-#define K58 KC_F5
-#define K59 KC_F6
-#define K60 KC_F7
-#define K61 KC_F8
-
-#define K62 KC_MUTE  // Assigns the key to the 'A' key
+#define K64 KC_MUTE
 
 #define OLED_TIMEOUT 60000
